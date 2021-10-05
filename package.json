@@ -5,8 +5,10 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server" : "nodemon server.js",
-    "start" : "node serve.js"
+    "server": "nodemon server.js",
+    "start": "node serve.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -20,6 +22,8 @@
   "homepage": "https://github.com/mohammed-sas/SPACEX_LAUNCH_STAT_REACT#readme",
   "dependencies": {
     "axios": "^0.22.0",
+    "concurrently": "^6.3.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-graphql": "^0.12.0",
     "graphql": "^15.6.1"
