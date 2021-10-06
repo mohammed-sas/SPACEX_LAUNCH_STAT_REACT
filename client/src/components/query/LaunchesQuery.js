@@ -1,5 +1,5 @@
 import {gql,useQuery} from '@apollo/client';
-import LaunchItem from './LaunchItem';
+import LaunchItem from '../LaunchItem';
 
 
 
@@ -14,7 +14,7 @@ const LAUNCHES_QUERY = gql`
     }
 `;
 
-const LaunchQuery = () =>{
+const LaunchesQuery = () =>{
 
         const { data, loading, error } = useQuery(LAUNCHES_QUERY);
         if(loading)
@@ -23,15 +23,15 @@ const LaunchQuery = () =>{
             console.log(error);
 
         return (
-         <>   
+         <div>   
             {
                 data.launches.map(launch => (
                     <LaunchItem key={launch.flight_number} launch={launch}/>
                 ))
             }
-        </>
+        </div>
         )
 
 }
 
-export default LaunchQuery;
+export default LaunchesQuery;
