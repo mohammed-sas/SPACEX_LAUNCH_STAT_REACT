@@ -12,9 +12,24 @@ const LaunchType  = new GraphQLObjectType({
         launch_date_local : { type :GraphQLString},
         launch_success : { type :GraphQLBoolean},
         rocket : { type :RocketType},
+        links : {type : ImageType}
         
     })
 });
+
+// link to fetch image
+const ImageType  = new GraphQLObjectType({
+    name : 'Image',
+    fields: () =>({
+        flickr_images : {type : new GraphQLList(GraphQLString)}
+        
+    })
+});
+
+
+
+
+
 
 // Rocket type
 

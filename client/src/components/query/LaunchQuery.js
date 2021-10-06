@@ -1,7 +1,7 @@
 import {gql,useQuery} from '@apollo/client';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
-
+import LaunchImage from '../LaunchImage';
 
 const LAUNCH_QUERY = gql `
     query LaunchQuery($flight_number : Int!){
@@ -16,6 +16,9 @@ const LAUNCH_QUERY = gql `
                 rocket_name
                 rocket_type
             }
+            links {
+                flickr_images
+            }
         }
     }
 `;
@@ -29,7 +32,7 @@ const LaunchQuery = ({flight_number}) =>{
         return <h4>Loading....</h4>;
     if(error)
         console.log(error);
-    const {mission_name,launch_year,launch_success,rocket :{rocket_id,rocket_name,rocket_type}} = data.launch;
+    const {mission_name,launch_year,links:{flickr_images},launch_success,rocket :{rocket_id,rocket_name,rocket_type}} = data.launch;
     return (
        <div> 
             <h1 className="display-4 my-3">
@@ -68,7 +71,17 @@ const LaunchQuery = ({flight_number}) =>{
                 </li>
             </ul>
             <hr />
+            
             <Link to="/" className="btn btn-secondary">Back</Link>
+            <div className="container">
+                <div className="row my-2">
+                {
+                    flickr_images.map(url => ( <LaunchImage url={url}/>
+                    ))
+                }
+                </div>
+            </div>
+               
         </div>
     )
 
